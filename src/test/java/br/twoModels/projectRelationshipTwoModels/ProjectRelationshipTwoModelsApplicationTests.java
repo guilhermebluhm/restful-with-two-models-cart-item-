@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ProjectRelationshipTwoModelsApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void testMethodMain() {
+		ProjectRelationshipTwoModelsApplication.main(new String[]{});
 	}
 
 }

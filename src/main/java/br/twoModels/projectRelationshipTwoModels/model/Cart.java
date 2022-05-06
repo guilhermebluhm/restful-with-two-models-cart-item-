@@ -24,6 +24,11 @@ public class Cart implements Serializable {
     @Column(unique = true)
     private String serialNumber;
 
+    public Cart(Integer id, String serial){
+        this.id = id;
+        this.serialNumber = serial;
+    }
+
     @OneToMany(
             cascade = CascadeType.ALL
     )

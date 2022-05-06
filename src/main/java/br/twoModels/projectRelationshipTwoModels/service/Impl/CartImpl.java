@@ -14,7 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 public class CartImpl implements CartService {
@@ -36,7 +35,7 @@ public class CartImpl implements CartService {
         this.cart_repositorio.deleteById(dto.getId());
     }
 
-    private Cart getCart(int id){
+    protected Cart getCart(int id){
         return this.cart_repositorio.findById(id).orElseThrow(() -> new ObjectNotFoundInSearch("erro"));
     }
 

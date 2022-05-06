@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@Setter
 public class CartDto implements Serializable {
 
     private Integer id;
@@ -26,9 +25,5 @@ public class CartDto implements Serializable {
 
     public static CartDto castToDto(Cart cart){
         return new CartDto(cart);
-    }
-
-    public static List<CartDto> castToListDto(List<Cart> cart){
-        return cart.stream().map(CartDto::new).collect(Collectors.toList());
     }
 }
