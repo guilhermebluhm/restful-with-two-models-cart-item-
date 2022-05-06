@@ -4,6 +4,7 @@ import br.twoModels.projectRelationshipTwoModels.model.Item;
 import br.twoModels.projectRelationshipTwoModels.model.dto.ItemDto;
 import br.twoModels.projectRelationshipTwoModels.repository.ItemRepository;
 import br.twoModels.projectRelationshipTwoModels.service.ItemService;
+import br.twoModels.projectRelationshipTwoModels.service.exception.ObjectNotFoundInSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class ItemImpl implements ItemService {
     }
 
     protected Item getItem(int id){
-        return this.item_repository.findById(id).orElseThrow(() -> new RuntimeException("erro"));
+        return this.item_repository.findById(id).orElseThrow(() -> new ObjectNotFoundInSearch("erro"));
     }
 
     @Override
@@ -36,7 +37,7 @@ public class ItemImpl implements ItemService {
                 ItemDto
                         .castToDto(this.item_repository
                         .findById(id)
-                        .orElseThrow(() -> new RuntimeException("impossivel localizar")));
+                        .orElseThrow(() -> new ObjectNotFoundInSearch("impossivel localizar")));
     }
 
     @Override

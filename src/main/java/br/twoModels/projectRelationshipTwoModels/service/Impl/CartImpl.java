@@ -5,6 +5,7 @@ import br.twoModels.projectRelationshipTwoModels.model.Item;
 import br.twoModels.projectRelationshipTwoModels.model.dto.CartDto;
 import br.twoModels.projectRelationshipTwoModels.repository.CartRepository;
 import br.twoModels.projectRelationshipTwoModels.service.CartService;
+import br.twoModels.projectRelationshipTwoModels.service.exception.ObjectNotFoundInSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +34,7 @@ public class CartImpl implements CartService {
     }
 
     private Cart getCart(int id){
-        return this.cart_repositorio.findById(id).orElseThrow(() -> new RuntimeException("erro"));
+        return this.cart_repositorio.findById(id).orElseThrow(() -> new ObjectNotFoundInSearch("erro"));
     }
 
     @Override
@@ -41,7 +42,7 @@ public class CartImpl implements CartService {
         return CartDto
                 .castToDto(this.cart_repositorio
                         .findById(id)
-                        .orElseThrow(() -> new RuntimeException("erro ao excluir")));
+                        .orElseThrow(() -> new ObjectNotFoundInSearch("erro ao excluir")));
     }
 
     @Override
