@@ -1,11 +1,10 @@
 package br.twoModels.projectRelationshipTwoModels.controller;
 
 import br.twoModels.projectRelationshipTwoModels.model.Cart;
-import br.twoModels.projectRelationshipTwoModels.model.Item;
 import br.twoModels.projectRelationshipTwoModels.model.dto.CartDto;
-import br.twoModels.projectRelationshipTwoModels.model.dto.ItemDto;
 import br.twoModels.projectRelationshipTwoModels.service.Impl.CartImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +25,11 @@ public class CartController {
 
     @GetMapping("/listar")
     @ResponseStatus(HttpStatus.OK)
-    public List<CartDto> listarTodosCarts(){
-        return this.implementacao.listAllCarts();
+    public Page<Cart> listarTodosCarts(
+            @RequestParam(required = false, defaultValue = "0") int pageInfo,
+            @RequestParam(required = false, defaultValue = "1") int tamPage,
+            @RequestParam(required = false, defaultValue = "serialNumber") String field){
+        return this.implementacao.listAllCarts(pageInfo,tamPage,field);
     }
 
     @GetMapping("/listar/{id}")

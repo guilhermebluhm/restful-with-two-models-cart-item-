@@ -7,11 +7,14 @@ import br.twoModels.projectRelationshipTwoModels.repository.CartRepository;
 import br.twoModels.projectRelationshipTwoModels.service.CartService;
 import br.twoModels.projectRelationshipTwoModels.service.exception.ObjectNotFoundInSearch;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartImpl implements CartService {
@@ -46,8 +49,9 @@ public class CartImpl implements CartService {
     }
 
     @Override
-    public List<CartDto> listAllCarts() {
-        return CartDto.castToListDto(this.cart_repositorio.findAll());
+    public Page<Cart> listAllCarts(int pageInfo, int tamPage, String field) {
+        Pageable page = PageRequest.of(pageInfo,tamPage, Sort.by(field).descending());
+        return this.cart_repositorio.findAll(page);
     }
 
     @Override
@@ -59,4 +63,5 @@ public class CartImpl implements CartService {
         t.setActive_cart(c);
         return CartDto.castToDto(c);
     }
+
 }
