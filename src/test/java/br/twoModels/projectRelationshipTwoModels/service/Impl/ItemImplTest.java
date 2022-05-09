@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,6 +50,7 @@ class ItemImplTest {
     @Test
     void getItem() {
         Mockito.when(this.itm_repository.findById(ID)).thenReturn(Optional.of(item));
+        Assertions.assertEquals(Mockito.anyList(), item.getActive_cart().getCart_items());
         try{
             this.impl.getItem(ID);
         }
@@ -65,10 +68,13 @@ class ItemImplTest {
 
     @Test
     void findSpecifyItem() {
+        Mockito.when(this.itm_repository.findById(ID)).thenReturn(Optional.of(item));
     }
 
     @Test
     void listAllItems() {
+        Mockito.when(this.itm_repository.findAll()).thenReturn(List.of(item));
+        Mockito.when(this.impl.listAllItems()).thenReturn(List.of(dto));
     }
 
     private void inicializarModelos(){

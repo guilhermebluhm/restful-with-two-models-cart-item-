@@ -1,5 +1,6 @@
 package br.twoModels.projectRelationshipTwoModels.service.exception;
 
+import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
+
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,5 +35,6 @@ class ObjectErrorNotFoundHandlerTest {
         Assertions.assertEquals("erro",e.getBody().getMessageError());
         Assertions.assertEquals(400,e.getBody().getError());
         Assertions.assertEquals("",e.getBody().getPath());
+        Assertions.assertEquals(LocalDate.now(),e.getBody().getTimestamp());
     }
 }
