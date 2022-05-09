@@ -12,9 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Cart implements Serializable {
 
@@ -38,9 +36,5 @@ public class Cart implements Serializable {
 
     public void addItem(Item item){
         this.cart_items.add(item);
-    }
-
-    public void removeItem(Item item){
-        this.cart_items.remove(item);
     }
 }
